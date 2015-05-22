@@ -13,7 +13,7 @@ Currently messaging infrastructure is built on amazon queuing and notification s
 
 class MessageBus():
 
-    def __init__(self, queue_name,connect_to_region="us-west-2", topic_name=None):
+    def __init__(self, queue_name,connect_to_region="us-east-1", topic_name=None):
         '''
         :param queue_name: String (Mandatory parameter) The queue name
         :param connect_to_region: String (Optional parameter, default value us-west2) Amazon AZ name.
@@ -40,6 +40,7 @@ class MessageBus():
             self.sns_conn = boto.sns.connect_to_region(connect_to_region)
             self.topic_object = self.sns_conn.create_topic(self.topic_name)
             self.sns_topic_arn = self.topic_object['CreateTopicResponse']['CreateTopicResult']['TopicArn']
+            #self.topic_object.set_topic_attributes(self.sns_topic_arn,"DisplayName", "foo")
             print("SNS topic created, ARN of the topic is : %s" % self.sns_topic_arn)
             subscription_result = self.sns_conn.subscribe_sqs_queue(self.sns_topic_arn, self.queue_object)
             self.subscription_arn = subscription_result['SubscribeResponse']['SubscribeResult']['SubscriptionArn']

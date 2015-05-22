@@ -12,7 +12,7 @@ def test():
     print "-"*80
     queue_with_topic = MessageBus(queue_name="queue_with_topic" , topic_name="chicken")
     input_data_use_case_1 =  [{'meta-inf':'content'},
-                  {'data':[{'campaign_name':"Campaign 100",'advertiser_name':"Advertiser 200"}]}]
+                  {'data':[{'campaign_name':"Ford Campaign",'message':"suggestions ready"}]}]
     print "Writing the input data"
     print input_data_use_case_1
     queue_with_topic.write_data(input_data_use_case_1)
